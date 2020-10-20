@@ -4,12 +4,16 @@ const Schema = mongoose.Schema;
 const ProfileSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'organisers'
     },
     name: {
         type: String,
         required: true,
         max: 40
+    },
+    dateOfBirth: {
+        type: Date,
+        required: true
     },
     organisation: {
         type: String,

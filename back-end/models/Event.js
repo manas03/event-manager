@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const EventSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: "users",
+    ref: "organisers",
   },
   eventname: {
     type: String,
@@ -19,20 +19,20 @@ const EventSchema = new Schema({
   eventimage: {
     type: String,
   },
-  hostingorganization: {
+  organization: {
     type: String,
     required: true,
   },
-  eventvenue: {
+  venue: {
     type: String,
     required: true,
   },
 
-  eventwebsitelink: {
+  eventwebsite: {
     type: String,
   },
 
-  eventtimeline: {
+  timeline: {
     RegistrationDeadline: {
       type: Date,
       required: true,
@@ -50,12 +50,10 @@ const EventSchema = new Schema({
       required: true,
     },
     EndingTime: {
-      type: String,
-      required: true,
+      type: String
     },
     ResultDate: {
       type: Date,
-      required: true,
     },
   },
 
@@ -141,7 +139,7 @@ const EventSchema = new Schema({
         type: String,
         required: true,
       },
-      Phonenumber: {
+      phone: {
         type: String,
         required: true,
       },
