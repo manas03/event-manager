@@ -2,15 +2,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const EventSchema = new Schema({
-  user: {
+  organiser: {
     type: Schema.Types.ObjectId,
     ref: "organisers",
   },
   eventname: {
     type: String,
     required: true,
-    max: 30,
-    min: 10,
   },
   eventinfo: {
     type: String,
@@ -19,7 +17,7 @@ const EventSchema = new Schema({
   eventimage: {
     type: String,
   },
-  organization: {
+  organisation: {
     type: String,
     required: true,
   },
@@ -88,12 +86,10 @@ const EventSchema = new Schema({
   eventteamsize: {
     max: {
       type: Number,
-      required: true,
-    },
+      },
     min: {
       type: Number,
-      required: true,
-    },
+      },
   },
 
   eventfaq: [

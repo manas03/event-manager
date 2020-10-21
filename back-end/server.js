@@ -9,8 +9,8 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// //DB config
-// const db = require("./config/keys").mongoURI;
+//DB config
+const db = require("./config/keys").mongoURI;
 
 //connect to mongodb
 mongoose
@@ -21,18 +21,13 @@ mongoose
   .then(() => console.log("MongoDB works"))
   .catch((err) => console.log(err));
 
-//app.get('/',(req,res)=> res.send('Hello'));
+app.get('/',(req,res)=> res.send('Hello'));
 
 //passport middleware
 app.use(passport.initialize());
 
 // Passport config
-require("./config/passport")(passport);
-
-// //Use routes
-// app.use("/api/users", users);
-// app.use("/api/profile", profile);
-// app.use("/api/posts", posts);
+// require("./config/passport")(passport);
 
 const port = process.env.PORT || 5000;
 
