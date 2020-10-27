@@ -30,31 +30,36 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Log In</h1>
+      <div classname="hk">
+        <div className="login">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-8 m-auto">
+                <h1 className="display-4 text-center">Log In</h1>
 
-              <form>
-                <div className="form-group">
+                <form>
+                  <div className="form-group">
+                    <input
+                      type="email"
+                      className="form-control form-control-lg"
+                      placeholder="Email Address"
+                      name="email"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="password"
+                      className="form-control form-control-lg"
+                      placeholder="Password"
+                      name="password"
+                    />
+                  </div>
                   <input
-                    type="email"
-                    className="form-control form-control-lg"
-                    placeholder="Email Address"
-                    name="email"
+                    type="submit"
+                    className="btn btn-info btn-block mt-4"
                   />
-                </div>
-                <div className="form-group">
-                  <input
-                    type="password"
-                    className="form-control form-control-lg"
-                    placeholder="Password"
-                    name="password"
-                  />
-                </div>
-                <input type="submit" className="btn btn-info btn-block mt-4" />
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>

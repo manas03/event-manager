@@ -52,6 +52,9 @@ class Register extends Component {
                     placeholder="Name"
                     name="name"
                   />
+                  <small className="form-text text-muted">
+                    Enter your Name
+                  </small>
                 </div>
                 <div className="form-group">
                   <input
@@ -68,11 +71,25 @@ class Register extends Component {
                 </div>
                 <div className="form-group">
                   <input
+                    type="date"
+                    className="form-control form-control-lg"
+                    placeholder="Date of Birth"
+                    name="dob"
+                  />
+                  <small className="form-text text-muted">
+                    Enter your Date of Birth
+                  </small>
+                </div>
+                <div className="form-group">
+                  <input
                     type="password"
                     className="form-control form-control-lg"
                     placeholder="Password"
                     name="password"
                   />
+                  <small className="form-text text-muted">
+                    Enter your password
+                  </small>
                 </div>
                 <div className="form-group">
                   <input
@@ -81,7 +98,11 @@ class Register extends Component {
                     placeholder="Confirm Password"
                     name="password2"
                   />
+                  <small className="form-text text-muted">
+                    Enter your password again
+                  </small>
                 </div>
+
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>
