@@ -12,7 +12,7 @@ function App() {
       <div className="hk">
         <Navbar />
         <Route exact path="/addevent" component={Events} />
-        <Route exact path="/" component={Register} />
+        <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
       </div>
     </Router>
