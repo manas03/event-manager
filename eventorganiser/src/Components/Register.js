@@ -52,6 +52,9 @@ class Register extends Component {
                     placeholder="Name"
                     name="name"
                   />
+                  <small className="form-text text-muted">
+                    Enter your Name
+                  </small>
                 </div>
                 <div className="form-group">
                   <input
@@ -68,11 +71,70 @@ class Register extends Component {
                 </div>
                 <div className="form-group">
                   <input
+                    type="date"
+                    className="form-control form-control-lg"
+                    placeholder="Date of Birth"
+                    name="dob"
+                  />
+                  <small className="form-text text-muted">
+                    Enter your Date of Birth
+                  </small>
+                </div>
+
+                <div className="form-group">
+                  <input
+                    type="text"
+                    className="form-control form-control-lg"
+                    placeholder="Organisation"
+                    name="organisation"
+                  />
+                  <small className="form-text text-muted">
+                    Enter your Organisation which is hosting the event
+                  </small>
+                </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    className="form-control form-control-lg"
+                    placeholder="Website"
+                    name="dob"
+                  />
+                  <small className="form-text text-muted">
+                    Enter your Website
+                  </small>
+                </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    className="form-control form-control-lg"
+                    placeholder="Post"
+                    name="dob"
+                  />
+                  <small className="form-text text-muted">
+                    Enter your post in the organization
+                  </small>
+                </div>
+                <div className="form-group">
+                  <input
+                    type="textarea"
+                    className="form-control form-control-lg"
+                    placeholder="Bio"
+                    name="dob"
+                  />
+                  <small className="form-text text-muted">
+                    Give a short intro about yourself
+                  </small>
+                </div>
+                <div className="form-group">
+                  <input
                     type="password"
                     className="form-control form-control-lg"
                     placeholder="Password"
                     name="password"
                   />
+                  <small className="form-text text-muted">
+                    Enter your password
+                  </small>
                 </div>
                 <div className="form-group">
                   <input
@@ -81,7 +143,11 @@ class Register extends Component {
                     placeholder="Confirm Password"
                     name="password2"
                   />
+                  <small className="form-text text-muted">
+                    Enter your password again
+                  </small>
                 </div>
+
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>
