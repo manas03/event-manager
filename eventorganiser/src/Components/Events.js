@@ -63,7 +63,7 @@ function Events() {
     <div classname="create-profile">
       <div className="container">
         <div className="row">
-          <div className="col-md-8 m-auto">
+          <div className="col-md-8 m-auto py-5">
             <h1 className="display-4 text-center">Add an event</h1>
             <p className="lead text-center">Fill up all the details</p>
 
@@ -100,7 +100,7 @@ function Events() {
               {eventtimeline}
               <div className="mb-3">Add prizes</div>
               <TextFieldGroup
-                placeholder=" prize position"
+                placeholder="Prize position"
                 info=" Enter the position of prize"
               />
               <TextFieldGroup
