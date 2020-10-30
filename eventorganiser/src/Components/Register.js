@@ -10,25 +10,20 @@ class Register extends Component {
       password2: '',
       errors: {}
     };
-
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-
   onSubmit(e) {
     e.preventDefault();
-
     const newUser = {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
       password2: this.state.password2
     };
-
     axios
       .post('/api/users/register', newUser)
       .then(res => console.log(res.data))
@@ -40,7 +35,7 @@ class Register extends Component {
 
     return (
       <div className="register">
-        <div className="container">
+        <div className="container py-5">
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up</h1>

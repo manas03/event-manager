@@ -1,6 +1,11 @@
 import React, { Component } from "react";
+import { Redirect } from 'react-router-dom'
 
 class Login extends Component {
+  constructor() {
+    super();
+    this.onClick = this.onClick.bind(this);
+  }
   /*constructor() {
     super();
     this.state = {
@@ -27,6 +32,10 @@ class Login extends Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }*/
+  onClick(e) {
+    e.preventDefault();
+    this.props.history.push('/dashboard')
+  }
 
   render() {
     return (
@@ -35,7 +44,6 @@ class Login extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Log In</h1>
-
               <form>
                 <div className="form-group">
                   <input
@@ -53,7 +61,7 @@ class Login extends Component {
                     name="password"
                   />
                 </div>
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                <input type="submit" className="btn btn-info btn-block mt-4"  onClick={this.onClick}/>
               </form>
             </div>
           </div>
