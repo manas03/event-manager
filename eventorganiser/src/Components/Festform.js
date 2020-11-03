@@ -2,7 +2,7 @@ import React from "react";
 import TextFieldGroup from "./Common/TextFieldGroup";
 import TextAreaFieldGroup from "./Common/TextAreaFieldGroup";
 import InputGroup from "./Common/InputGroup.js";
-function Festform() {
+function Festform(props) {
   let socialInputs;
   let eventtimeline;
   socialInputs = (
@@ -33,7 +33,11 @@ function Festform() {
         icon="fab fa-youtube"
       />
     </div>
-  );
+  )
+let onClick=(e)=> {
+    e.preventDefault();
+    props.history.push('/festdashboard')
+  }
   
 
   return (
@@ -71,6 +75,7 @@ function Festform() {
                 type="submit"
                 value="Submit"
                 className="btn btn-info btn-block mt-4"
+                onClick={onClick}
               />
             </form>
           </div>
