@@ -1,5 +1,5 @@
 .hk {
-  background-image: url("./bg_first.jpg");
+  background-image: url("./img/bg_first.jpg");
   min-height: 100vh;
   background-size: cover;
   background-attachment: fixed;
@@ -7,6 +7,7 @@
   background-position: center;
 }
 .landing {
+  background-image: url("./img/landing.jpg");
   position: relative;
   background-size: cover;
   background-position: center;
@@ -20,7 +21,7 @@
 }
 
 .dark-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0;
   left: 0;
