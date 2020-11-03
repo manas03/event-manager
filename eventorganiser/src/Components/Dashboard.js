@@ -7,7 +7,7 @@ export default class Dashboard extends Component {
       <div className="container">
         <div className="row mx-auto">
         <div className="container w-25 pt-5">
-          <Link className="text-decoration-none" to="/addevent">
+          <Link className="text-decoration-none" to="/addfest">
           <div className="wrapper">            
               <div className="card">
                 <h4>Organise A Fest</h4>

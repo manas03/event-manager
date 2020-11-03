@@ -7,6 +7,7 @@ import Register from "./Components/Register";
 import Navbar from "./Components/Navbar";
 import Dashboard from "./Components/Dashboard";
 import Landing from "./Components/Landing";
+import Festform from "./Components/Festform";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/addfest" component={Festform} />
       </div>
     </Router>
   );
