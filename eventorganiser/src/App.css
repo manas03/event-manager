@@ -1,5 +1,5 @@
 .hk {
-  background-image: url("./bg_first.jpg");
+  background-image: url("./img/bg_first.jpg");
   min-height: 100vh;
   background-size: cover;
   background-attachment: fixed;
@@ -7,6 +7,7 @@
   background-position: center;
 }
 .landing {
+  background-image: url("./img/landing.jpg");
   position: relative;
   background-size: cover;
   background-position: center;
@@ -20,7 +21,7 @@
 }
 
 .dark-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0;
   left: 0;
@@ -45,13 +46,60 @@
   position: relative;
   perspective: 40em;
   display: grid;
+   margin-top: 50px;
   transform-style: preserve-3d;
 }
+.fix{
+  top: 50%;
+  bottom: 50%;
+  margin-top: 60px;
+}
+.first{
+   text-align: center;
+   color:white;
+   font-family: 'Kaushan Script', cursive;
+} 
+.second{
+  text-align: center;
+  font-family: 'Kaushan Script', cursive;
 
+  color:white;
+} 
+.third{
+  text-align: center;
+  color:white;
+  font-family: 'Kaushan Script',cursive;
+} 
+.festname{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+.events
+{
+  margin-top:40px;
+  margin-bottom:40px;
+}
+.ef{
+  margin-top:20px;
+}
+.eventbutton
+{
+  margin: 10px 40px 10px 40px;
+  width: 100%;
+  background: white;
+  color:black;
+}
+.eventtag{
+  margin-left:20px;
+  margin-right: 20px;
+}
 .card {
   grid-area: 1 / 1;
   height: 200px;
   width: 400px;
+
   transform: translateX(10px) rotateY(25deg) rotateX(10deg);
   background: rgba(223, 57, 2, 0.88);
   display: flex;
@@ -85,6 +133,7 @@ h1 {
   --bw: 9px;
   grid-area: 1 / 1;
   content: "";
+  
   backface-visibility: hidden;
   height: 100%;
   width: 100%;
