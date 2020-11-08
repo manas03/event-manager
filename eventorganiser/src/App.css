@@ -46,37 +46,38 @@
   position: relative;
   perspective: 40em;
   display: grid;
-   margin-top: 50px;
+  margin-top: 50px;
   transform-style: preserve-3d;
 }
-.fix{
+.fix {
   top: 50%;
   bottom: 50%;
   margin-top: 60px;
 }
-.first{
-   text-align: center;
-   color:white;
-   font-family: 'Kaushan Script', cursive;
-} 
-.second{
+.first {
   text-align: center;
-  font-family: 'Kaushan Script', cursive;
+  color: white;
+  font-family: "Kaushan Script", cursive;
+}
+.second {
+  text-align: center;
+  font-family: "Kaushan Script", cursive;
 
-  color:white;
-} 
-.third{
+  color: white;
+}
+.third {
   text-align: center;
-  color:white;
-  font-family: 'Kaushan Script',cursive;
-} 
-.festname{
+  color: white;
+  font-family: "Kaushan Script", cursive;
+}
+.festname {
   justify-content: center;
   align-items: center;
   text-align: center;
   color: white;
 }
-.events
+
+/* .events
 {
   margin-top:40px;
   margin-bottom:40px;
@@ -94,7 +95,8 @@
 .eventtag{
   margin-left:20px;
   margin-right: 20px;
-}
+} */
+
 .card {
   grid-area: 1 / 1;
   height: 200px;
@@ -133,7 +135,7 @@ h1 {
   --bw: 9px;
   grid-area: 1 / 1;
   content: "";
-  
+
   backface-visibility: hidden;
   height: 100%;
   width: 100%;

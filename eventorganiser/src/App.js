@@ -22,7 +22,6 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/addfest" component={Festform} />
         <Route exact path="/festdashboard" component={Festdashboard} />
-
       </div>
     </Router>
   );
