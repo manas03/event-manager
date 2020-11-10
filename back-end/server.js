@@ -1,33 +1,40 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const passport = require("passport");
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+
+const students = require('./routes/api/students');
+const studentprofile = require('./routes/api/studentprofile');
+//const posts = require('./routes/api/posts');
 
 const app = express();
 
-//body parser middleware
+// Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//DB config
-const db = require("./config/keys").mongoURI;
+// DB Config
+const db = require('./config/keys').mongoURI;
 
-//connect to mongodb
+// Connect to MongoDB
 mongoose
-  .connect(db, {
+  .connect(db,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("MongoDB works"))
-  .catch((err) => console.log(err));
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log(err));
 
-app.get('/',(req,res)=> res.send('Hello'));
-
-//passport middleware
+// Passport middleware
 app.use(passport.initialize());
 
-// Passport config
-// require("./config/passport")(passport);
+// Passport Config
+require('./config/passport')(passport);
+
+// Use Routes
+app.use('/api/students', students);
+app.use('/api/studentprofile', studentprofile);
+//app.use('/api/posts', posts);
 
 const port = process.env.PORT || 5000;
 
