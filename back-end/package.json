@@ -4,11 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "client-install": "npm install --prefix client",
+    "eventorganiser-install": "npm install --prefix eventorganiser",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "eventorganiser": "cd ../eventorganiser && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run eventorganiser\""
   },
   "author": "Minor",
   "license": "ISC",
@@ -25,5 +25,8 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "validator": "^13.1.17"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }

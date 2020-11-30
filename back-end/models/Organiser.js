@@ -23,4 +23,4 @@ const OrganiserSchema = new Schema({
   }
 });
 
-module.exports = User = mongoose.model("users", OrganiserSchema);
+module.exports = Organiser = mongoose.model("organisers", OrganiserSchema);

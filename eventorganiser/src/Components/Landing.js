@@ -20,7 +20,7 @@ class Landing extends Component {
                 <Link to="/login" className="btn btn-lg btn-dark mr-2">
                   Log In Organiser
                 </Link>
-                <Link to="/login" className="btn btn-lg btn-light">
+                <Link to="/loginuser" className="btn btn-lg btn-light">
                   Log In Student
                 </Link>
               </div>
