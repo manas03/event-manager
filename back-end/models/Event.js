@@ -2,9 +2,18 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const EventSchema = new Schema({
-  organiser: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: "organisers",
+  },
+  festuser:{
+    type: Schema.Types.ObjectId,
+    ref: "fests",
+ 
+  },
+  fest:{
+    type:Boolean,
+    
   },
   eventname: {
     type: String,
@@ -41,7 +50,7 @@ const EventSchema = new Schema({
     },
     StartingTime: {
       type: String,
-      required: true,
+
     },
     EndingDate: {
       type: Date,
@@ -54,35 +63,6 @@ const EventSchema = new Schema({
       type: Date,
     },
   },
-
-  eventprizes: [
-    {
-      position: {
-        type: String,
-        required: true,
-      },
-      prizeinfo: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-  sponsorprizes: [
-    {
-      sponsorprizename: {
-        type: String,
-        required: true,
-      },
-      sponsorprize: {
-        type: String,
-        required: true,
-      },
-      sponsorprizeinfo: {
-        type: String,
-      },
-    },
-  ],
-
   eventteamsize: {
     max: {
       type: Number,
@@ -91,6 +71,36 @@ const EventSchema = new Schema({
       type: Number,
       },
   },
+
+  eventprizes: [
+    {
+      position: {
+        type: String,
+  
+      },
+      prizeinfo: {
+        type: String,
+  
+      },
+    },
+  ],
+  
+  /*sponsorprizes: [
+    {
+      sponsorprizename: {
+        type: String,
+      
+      },
+      sponsorprize: {
+        type: String,
+      },
+      sponsorprizeinfo: {
+        type: String,
+      },
+    },
+  ],*/
+
+  
 
   eventfaq: [
     {
@@ -108,7 +118,7 @@ const EventSchema = new Schema({
     {
       eventsponsorname: {
         type: String,
-        required: true,
+  
       },
       eventspoonsorimage: {
         type: String,
@@ -145,4 +155,4 @@ const EventSchema = new Schema({
     },
   ],
 });
-module.exports = User = mongoose.model("users", EventSchema);
+module.exports = Event = mongoose.model("events", EventSchema);

@@ -5,6 +5,10 @@ const passport = require('passport');
 
 const students = require('./routes/api/students');
 const studentprofile = require('./routes/api/studentprofile');
+const organisers = require('./routes/api/organisers');
+const events = require('./routes/api/events');
+const fests=require('./routes/api/fests')
+
 //const posts = require('./routes/api/posts');
 
 const app = express();
@@ -17,6 +21,8 @@ app.use(bodyParser.json());
 const db = require('./config/keys').mongoURI;
 
 // Connect to MongoDB
+mongoose.set('useFindAndModify', false);
+
 mongoose
   .connect(db,{
     useNewUrlParser: true,
@@ -34,6 +40,9 @@ require('./config/passport')(passport);
 // Use Routes
 app.use('/api/students', students);
 app.use('/api/studentprofile', studentprofile);
+app.use('/api/organisers',organisers);
+app.use('/api/events',events);
+app.use('/api/fests',fests)
 //app.use('/api/posts', posts);
 
 const port = process.env.PORT || 5000;

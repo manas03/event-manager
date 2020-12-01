@@ -5,9 +5,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
-
+//const dh=require("../../config/passport")
 //Load user model
 const Organiser = require("../../models/Organiser");
+
+const validateRegisterInput = require('../../validation/register');
+const validateLoginInput = require('../../validation/login');
 
 router.get("/test", (req, res) => res.json({ msg: "organisers works" }));
 
@@ -68,17 +71,17 @@ router.post("/login", (req, res) => {
   const password = req.body.password;
 
   //Find the user by email
-  User.findOne({ email }).then(user => {
-    if (!user) {
-      errors.email = "User not found";
+  Organiser.findOne({ email }).then(organiser => {
+    if (!organiser) {
+      errors.email = "organiser not found";
       return res.status(404).json(errors);
     }
 
     //check password
-    bcrypt.compare(password, user.password).then(isMatch => {
+    bcrypt.compare(password, organiser.password).then(isMatch => {
       if (isMatch) {
-        //User matched
-        const payload = { id: user.id, name: user.name, avatar: user.avatar };
+        //organiser matched
+        const payload = { id: organiser.id, name: organiser.name, avatar: organiser.avatar };
 
         //sign token
         jwt.sign(
@@ -105,7 +108,7 @@ router.post("/login", (req, res) => {
 // @access  Private
 router.get(
   "/current",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("organiser", { session: false }),
   (req, res) => {
     res.json({
       id: req.user.id,

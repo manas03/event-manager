@@ -4,13 +4,14 @@ const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
-const passport = require("passport");
+const passport = require('passport')
 
 // Load Input Validation
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 //Load student model
 const Student = require("../../models/Student");
+//const passport2 = require("../../config/passport2");
 
 router.get("/test", (req, res) => res.json({ msg: "student works" }));
 
@@ -109,7 +110,7 @@ router.post("/login", (req, res) => {
 // @access  Private
 router.get(
   '/current',
-  passport.authenticate('jwt', { session: false }),
+  passport.authenticate('student', { session: false }),
   (req, res) => {
     res.json(
         {
