@@ -106,11 +106,11 @@ const EventSchema = new Schema({
     {
       question: {
         type: String,
-        required: true,
+      
       },
       answer: {
         type: String,
-        required: true,
+
       },
     },
   ],
@@ -143,11 +143,11 @@ const EventSchema = new Schema({
     {
       name: {
         type: String,
-        required: true,
+        
       },
       phone: {
         type: String,
-        required: true,
+    
       },
       email: {
         type: String,
