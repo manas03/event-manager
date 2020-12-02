@@ -2,9 +2,16 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const EventSchema = new Schema({
-  organiser: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: "organisers",
+  },
+  festuser: {
+    type: Schema.Types.ObjectId,
+    ref: "fests",
+  },
+  fest: {
+    type: Boolean,
   },
   eventname: {
     type: String,
@@ -41,17 +48,24 @@ const EventSchema = new Schema({
     },
     StartingTime: {
       type: String,
-      required: true,
     },
     EndingDate: {
       type: Date,
       required: true,
     },
     EndingTime: {
-      type: String
+      type: String,
     },
     ResultDate: {
       type: Date,
+    },
+  },
+  eventteamsize: {
+    max: {
+      type: Number,
+    },
+    min: {
+      type: Number,
     },
   },
 
@@ -59,48 +73,35 @@ const EventSchema = new Schema({
     {
       position: {
         type: String,
-        required: true,
       },
       prizeinfo: {
         type: String,
-        required: true,
       },
     },
   ],
-  sponsorprizes: [
+
+  /*sponsorprizes: [
     {
       sponsorprizename: {
         type: String,
-        required: true,
+      
       },
       sponsorprize: {
         type: String,
-        required: true,
       },
       sponsorprizeinfo: {
         type: String,
       },
     },
-  ],
-
-  eventteamsize: {
-    max: {
-      type: Number,
-      },
-    min: {
-      type: Number,
-      },
-  },
+  ],*/
 
   eventfaq: [
     {
       question: {
         type: String,
-        required: true,
       },
       answer: {
         type: String,
-        required: true,
       },
     },
   ],
@@ -108,7 +109,6 @@ const EventSchema = new Schema({
     {
       eventsponsorname: {
         type: String,
-        required: true,
       },
       eventspoonsorimage: {
         type: String,
@@ -133,11 +133,9 @@ const EventSchema = new Schema({
     {
       name: {
         type: String,
-        required: true,
       },
       phone: {
         type: String,
-        required: true,
       },
       email: {
         type: String,
@@ -145,4 +143,4 @@ const EventSchema = new Schema({
     },
   ],
 });
-module.exports = User = mongoose.model("users", EventSchema);
+module.exports = Event = mongoose.model("events", EventSchema);

@@ -1,45 +1,36 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const OrganiserSchema = new Schema({
+const FestSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "organisers",
   },
-  name: {
+  festname: {
     type: String,
     required: true,
   },
-  email: {
+  festtagline: {
     type: String,
     required: true,
   },
-  password: {
+  institute: {
     type: String,
     required: true,
-  },
-  organisation: {
-    type: String,
-  },
-  bio: {
-    type: String,
-  },
-  post: {
-    type: String,
   },
   website: {
     type: String,
   },
-  dateofbirth: {
-    type: String,
-  },
-  avatar: {
-    type: String,
-  },
+  hacks: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "events",
+    },
+  ],
   date: {
     type: Date,
     default: Date.now,
   },
 });
 
-module.exports = Organiser = mongoose.model("organisers", OrganiserSchema);
+module.exports = Fest = mongoose.model("fests", FestSchema);

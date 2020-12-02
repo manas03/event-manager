@@ -9,12 +9,10 @@ const StudentProfileSchema = new Schema({
   handle: {
     type: String,
     required: true,
-    max: 20,
+    max: 40,
   },
   institute: {
     type: String,
-    required: true,
-    max: 40,
   },
   gender: {
     type: String,
@@ -23,7 +21,7 @@ const StudentProfileSchema = new Schema({
   phoneno: {
     type: Number,
   },
-  dateOfbirth: {
+  dateofbirth: {
     type: Date,
   },
   profilephoto: {
