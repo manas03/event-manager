@@ -5,9 +5,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
-
+//const dh=require("../../config/passport")
 //Load user model
 const Organiser = require("../../models/Organiser");
+
+const validateRegisterInput = require("../../validation/register");
+const validateLoginInput = require("../../validation/login");
 
 router.get("/test", (req, res) => res.json({ msg: "organisers works" }));
 
@@ -22,7 +25,7 @@ router.post("/register", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  Organiser.findOne({ email: req.body.email }).then(organiser => {
+  Organiser.findOne({ email: req.body.email }).then((organiser) => {
     if (organiser) {
       errors.email = "Email already exists";
       return res.status(400).json(errors);
@@ -30,14 +33,14 @@ router.post("/register", (req, res) => {
       const avatar = gravatar.url(req.body.email, {
         s: "200", // Size
         r: "pg", // Rating
-        d: "mm" // Default
+        d: "mm", // Default
       });
 
       const newOrganiser = new Organiser({
         name: req.body.name,
         email: req.body.email,
         avatar,
-        password: req.body.password
+        password: req.body.password,
       });
 
       bcrypt.genSalt(10, (err, salt) => {
@@ -46,8 +49,8 @@ router.post("/register", (req, res) => {
           newOrganiser.password = hash;
           newOrganiser
             .save()
-            .then(organiser => res.json(organiser))
-            .catch(err => console.log(err));
+            .then((organiser) => res.json(organiser))
+            .catch((err) => console.log(err));
         });
       });
     }
@@ -68,17 +71,21 @@ router.post("/login", (req, res) => {
   const password = req.body.password;
 
   //Find the user by email
-  User.findOne({ email }).then(user => {
-    if (!user) {
-      errors.email = "User not found";
+  Organiser.findOne({ email }).then((organiser) => {
+    if (!organiser) {
+      errors.email = "organiser not found";
       return res.status(404).json(errors);
     }
 
     //check password
-    bcrypt.compare(password, user.password).then(isMatch => {
+    bcrypt.compare(password, organiser.password).then((isMatch) => {
       if (isMatch) {
-        //User matched
-        const payload = { id: user.id, name: user.name, avatar: user.avatar };
+        //organiser matched
+        const payload = {
+          id: organiser.id,
+          name: organiser.name,
+          avatar: organiser.avatar,
+        };
 
         //sign token
         jwt.sign(
@@ -88,7 +95,7 @@ router.post("/login", (req, res) => {
           (err, token) => {
             res.json({
               success: true,
-              token: "Bearer " + token
+              token: "Bearer " + token,
             });
           }
         );
@@ -105,12 +112,12 @@ router.post("/login", (req, res) => {
 // @access  Private
 router.get(
   "/current",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("organiser", { session: false }),
   (req, res) => {
     res.json({
       id: req.user.id,
       name: req.user.name,
-      email: req.user.email
+      email: req.user.email,
     });
   }
 );

@@ -14,14 +14,14 @@ router.get("/test", (req, res) => res.json({ msg: "StudentProfile works" }));
 
 router.get(
   "/",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("student", { session: false }),
   (req, res) => {
     const errors = {};
     StudentProfile.findOne({ user: req.user.id })
       .populate("user", ["name", "avatar"])
       .then((studentprofile) => {
         if (!studentprofile) {
-          errors.nostudentprofile = "There is no Student Profile for user";
+          errors.nostudentprofile = "There is no StudentProfile for user";
           return res.status(404).json(errors);
         }
         res.json(studentprofile);
@@ -29,6 +29,18 @@ router.get(
       .catch((err) => res.status(404).json(err));
   }
 );
+router.get("/all", (req, res) => {
+  StudentProfile.find()
+    .populate("user", ["name", "avatar"])
+    .then((studentprofiles) => {
+      if (!studentprofiles) {
+        errors.nostudentprofile = "There are no StudentProfiles";
+        return res.status(404).json(errors);
+      }
+      res.json(studentprofile);
+    })
+    .catch((err) => res.status(404).json(err));
+});
 
 router.get("/all", (req, res) => {
   StudentProfile.find()
@@ -79,7 +91,7 @@ router.get("/user/:user_id", (req, res) => {
 
 router.post(
   "/",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("student", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateStudentProfileInput(req.body);
 
@@ -89,7 +101,8 @@ router.post(
     const StudentProfileFields = {};
     StudentProfileFields.user = req.user.id;
     if (req.body.handle) StudentProfileFields.handle = req.body.handle;
-    if (req.body.institute) StudentProfileFields.institute = req.body.institute;
+    if (req.body.firstname) StudentProfileFields.firstname = req.body.firstname;
+    if (req.body.lastname) StudentProfileFields.lastname = req.body.lastname;
     if (req.body.gender) StudentProfileFields.gender = req.body.gender;
     if (req.body.phoneno) StudentProfileFields.phoneno = req.body.phoneno;
     if (req.body.dateofbirth)
@@ -102,6 +115,8 @@ router.post(
       StudentProfileFields.profilephoto = req.body.profilephoto;
     if (req.body.githubusername)
       StudentProfileFields.githubusername = req.body.githubusername;
+    if (req.body.institute) StudentProfileFields.institute = req.body.institute;
+
     //Skills
     if (typeof req.body.skills !== "undefined") {
       StudentProfileFields.skills = req.body.skills.split(",");
@@ -118,16 +133,16 @@ router.post(
       StudentProfileFields.social.linkedin = req.body.linkedin;
     if (req.body.instagram)
       StudentProfileFields.social.instagram = req.body.instagram;
+    if (req.body.discord)
+      StudentProfileFields.social.discord = req.body.discord;
 
     StudentProfile.findOne({ user: req.user.id }).then((studentprofile) => {
       if (studentprofile) {
-        studentprofile
-          .findOneAndUpdate(
-            { user: req.user.id },
-            { $set: StudentProfileFields },
-            { new: true }
-          )
-          .then((studentprofile) => res.json(studentprofile));
+        StudentProfile.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: StudentProfileFields },
+          { new: true }
+        ).then((studentprofile) => res.json(studentprofile));
       } else {
         StudentProfile.findOne({ handle: StudentProfileFields.handle }).then(
           (studentprofile) => {
@@ -147,7 +162,7 @@ router.post(
 );
 router.post(
   "/experience",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("student", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateExperienceInput(req.body);
 
@@ -172,7 +187,7 @@ router.post(
 );
 router.post(
   "/education",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("student", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateEducationInput(req.body);
 
