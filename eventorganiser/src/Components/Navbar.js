@@ -1,27 +1,53 @@
-/*import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
-import { clearCurrentProfile } from "../../actions/profileActions";
+import { logoutUser } from "../actions/authActions";
+import {
+  clearCurrentProfile,
+  getCurrentProfile,
+} from "../actions/profileActions";
 
 class Navbar extends Component {
+  onLogoutClick(e) {
+    e.preventDefault();
+    this.props.clearCurrentProfile();
+    this.props.logoutUser();
+    this.props.history.push("/loginuser");
+  }
+
+  componentDidMount() {
+    this.props.getCurrentProfile();
+  }
+
+  onProfile(e) {
+    e.preventDefault();
+    const { profile } = this.props.profile;
+    this.props.history.push(`/profile/${profile.handle}`);
+  }
+
   render() {
+    const { isAuthenticated, user } = this.props.auth;
+
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          <Link className="nav-link" to="/feed">
-            Post Feed
-          </Link>
+          <div
+            className="nav-link cursor"
+            to="profile"
+            onClick={this.onProfile.bind(this)}
+          >
+            Profile
+          </div>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/dashboard">
+          <Link className="nav-link" to="/studentdash">
             Dashboard
           </Link>
         </li>
         <li className="nav-item">
           <Link
-            onClick={this.onLogoutClick}
+            onClick={this.onLogoutClick.bind(this)}
             className="nav-link"
             to="/dashboard"
           >
@@ -30,7 +56,7 @@ class Navbar extends Component {
               alt={user.name}
               className="rounded-circle"
               title="You must have a Gravatar connected to your email to display an image"
-              style={{ width: "25px", marginRight: "5px" }}
+              style={{ width: "25px", height: "25px", marginRight: "5px" }}
             />
             Logout
           </Link>
@@ -41,24 +67,23 @@ class Navbar extends Component {
     const guestLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          <Link className="nav-link" to="/register">
+          <Link className="nav-link" to="/registeruser">
             Sign Up
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/login">
+          <Link className="nav-link" to="/loginuser">
             Login
           </Link>
         </li>
       </ul>
     );
 
-    // Return is only for JSX
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4 sticky-top">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            DevConnector
+            Event Manager
           </Link>
           <button
             className="navbar-toggler"
@@ -73,7 +98,6 @@ class Navbar extends Component {
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
                 <Link className="nav-link" to="/profiles">
-                  {" "}
                   Developers
                 </Link>
               </li>
@@ -86,45 +110,20 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
-*/
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+Navbar.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+};
 
-class Navbar extends Component {
-  render() {
-    return (
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
-        <div className="container">
-          <Link className="navbar-brand" to="/">
-            EVENT MANAGER
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#mobile-nav"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-          <div className="collapse navbar-collapse" id="mobile-nav">
-             <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link className="nav-link" to="/register">
-                 Edit Profile
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  Logout
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    );
-  }
-}
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  profile: state.profile,
+});
 
-export default Navbar;
+export default connect(mapStateToProps, {
+  logoutUser,
+  clearCurrentProfile,
+  getCurrentProfile,
+})(withRouter(Navbar));

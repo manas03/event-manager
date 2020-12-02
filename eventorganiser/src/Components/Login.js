@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
 
 class Login extends Component {
   constructor() {
@@ -34,7 +34,7 @@ class Login extends Component {
   }*/
   onClick(e) {
     e.preventDefault();
-    this.props.history.push('/dashboard')
+    this.props.history.push("/dashboard");
   }
 
   render() {
@@ -61,7 +61,11 @@ class Login extends Component {
                     name="password"
                   />
                 </div>
-                <input type="submit" className="btn btn-info btn-block mt-4"  onClick={this.onClick}/>
+                <input
+                  type="submit"
+                  className="btn btn-info btn-block mt-4"
+                  onClick={this.onClick}
+                />
               </form>
             </div>
           </div>

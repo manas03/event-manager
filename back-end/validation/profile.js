@@ -1,71 +1,60 @@
-const Validator = require('validator');
-const isEmpty = require('./is-empty');
+const Validator = require("validator");
+const isEmpty = require("./is-empty");
 
 module.exports = function validateProfileInput(data) {
   let errors = {};
 
-  data.handle = !isEmpty(data.handle) ? data.handle : '';
-  //data.status = !isEmpty(data.status) ? data.status : '';
-  data.skills = !isEmpty(data.skills) ? data.skills : '';
-  data.firstname = !isEmpty(data.firstname) ? data.firstname : '';
-  data.lastname = !isEmpty(data.lastname) ? data.lastname : '';
-   
-  if (!Validator.isLength(data.handle, { min: 2, max: 40 })) {
-    errors.handle = 'Handle needs to between 2 and 4 characters';
-  }
+  data.handle = !isEmpty(data.handle) ? data.handle : "";
+  data.skills = !isEmpty(data.skills) ? data.skills : "";
+  data.firstname = !isEmpty(data.firstname) ? data.firstname : "";
+  data.lastname = !isEmpty(data.lastname) ? data.lastname : "";
 
-  if (Validator.isEmpty(data.handle)) {
-    errors.handle = 'Profile handle is required';
+  if (!Validator.isLength(data.handle, { min: 2, max: 40 })) {
+    errors.handle = "Handle needs to between 2 and 40 characters";
   }
-  if (Validator.isEmpty(data.firstname)) {
-    errors.firstname = 'first name is required';
-  }if (Validator.isEmpty(data.lastname)) {
-    errors.lastname = 'Last name is required';
-  }
-  
 
   if (Validator.isEmpty(data.skills)) {
-    errors.skills = 'Skills field is required';
+    errors.skills = "Skills field is required";
   }
 
   if (!isEmpty(data.website)) {
     if (!Validator.isURL(data.website)) {
-      errors.website = 'Not a valid URL';
+      errors.website = "Not a valid URL";
     }
   }
 
   if (!isEmpty(data.youtube)) {
     if (!Validator.isURL(data.youtube)) {
-      errors.youtube = 'Not a valid URL';
+      errors.youtube = "Not a valid URL";
     }
   }
 
   if (!isEmpty(data.twitter)) {
     if (!Validator.isURL(data.twitter)) {
-      errors.twitter = 'Not a valid URL';
+      errors.twitter = "Not a valid URL";
     }
   }
 
   if (!isEmpty(data.facebook)) {
     if (!Validator.isURL(data.facebook)) {
-      errors.facebook = 'Not a valid URL';
+      errors.facebook = "Not a valid URL";
     }
   }
 
   if (!isEmpty(data.linkedin)) {
     if (!Validator.isURL(data.linkedin)) {
-      errors.linkedin = 'Not a valid URL';
+      errors.linkedin = "Not a valid URL";
     }
   }
 
   if (!isEmpty(data.instagram)) {
     if (!Validator.isURL(data.instagram)) {
-      errors.instagram = 'Not a valid URL';
+      errors.instagram = "Not a valid URL";
     }
   }
 
   return {
     errors,
-    isValid: isEmpty(errors)
+    isValid: isEmpty(errors),
   };
 };

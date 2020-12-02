@@ -6,14 +6,15 @@ import InputGroup from "../Common/InputGroup";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import { createProfile } from "../../actions/profileActions";
+import { createProfile, getCurrentProfile } from "../../actions/profileActions";
 import classnames from "classnames";
+import isEmpty from "../../validation/is-empty";
 
 class CreateProfile extends Component {
   constructor() {
     super();
     this.state = {
-      displaySocialInputs: false,
+      displaySocialInputs: true,
       handle: "",
       phoneno: "",
       institute: "",
@@ -65,8 +66,66 @@ class CreateProfile extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  componentDidMount() {
+    this.props.getCurrentProfile();
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) this.setState({ errors: nextProps.errors });
+    if (nextProps.profile.profile) {
+      const profile = nextProps.profile.profile;
+
+      // Make skills back into an array
+      const skillsCSV = profile.skills.join(",");
+      //If profile doesnt exist make empty string
+      profile.phoneno = !isEmpty(profile.phoneno) ? profile.phoneno : "";
+      profile.institute = !isEmpty(profile.institute) ? profile.institute : "";
+      profile.gender = !isEmpty(profile.gender) ? profile.gender : "";
+      profile.website = !isEmpty(profile.website) ? profile.website : "";
+      profile.dateofbirth = !isEmpty(profile.dateofbirth)
+        ? profile.dateofbirth
+        : "";
+      profile.githubusername = !isEmpty(profile.githubusername)
+        ? profile.githubusername
+        : "";
+      profile.bio = !isEmpty(profile.bio) ? profile.bio : "";
+      profile.social = !isEmpty(profile.social) ? profile.social : {};
+      profile.twitter = !isEmpty(profile.social.twitter)
+        ? profile.social.twitter
+        : "";
+      profile.facebook = !isEmpty(profile.social.facebook)
+        ? profile.social.facebook
+        : "";
+      profile.linkedin = !isEmpty(profile.social.linkedin)
+        ? profile.social.linkedin
+        : "";
+      profile.youtube = !isEmpty(profile.social.youtube)
+        ? profile.social.youtube
+        : "";
+      profile.instagram = !isEmpty(profile.social.instagram)
+        ? profile.social.instagram
+        : "";
+
+      // Set component state
+      this.setState({
+        handle: profile.handle,
+        gender: profile.gender,
+        phoneno: profile.phoneno,
+        institute: profile.institute,
+        dateofbirth: profile.dateofbirth,
+        website: profile.website,
+        resume: profile.resume,
+        skills: skillsCSV,
+        githubusername: profile.githubusername,
+        bio: profile.bio,
+        profilephoto: profile.profilephoto,
+        twitter: profile.twitter,
+        facebook: profile.facebook,
+        linkedin: profile.linkedin,
+        youtube: profile.youtube,
+        instagram: profile.instagram,
+      });
+    }
   }
 
   render() {
@@ -77,7 +136,7 @@ class CreateProfile extends Component {
       socialInputs = (
         <div>
           <InputGroup
-            placeholder="Facebook Profile URL"
+            placeholder="Facebook profile URL"
             name="facebook"
             icon="fab fa-facebook fa-2x"
             value={this.state.facebook}
@@ -85,7 +144,7 @@ class CreateProfile extends Component {
             error={errors.facebook}
           />
           <InputGroup
-            placeholder="Youtube Profile URL"
+            placeholder="Youtube profile URL"
             name="youtube"
             icon="fab fa-youtube fa-2x"
             value={this.state.youtube}
@@ -93,7 +152,7 @@ class CreateProfile extends Component {
             error={errors.youtube}
           />
           <InputGroup
-            placeholder="Twitter Profile URL"
+            placeholder="Twitter profile URL"
             name="twitter"
             icon="fab fa-twitter fa-2x"
             value={this.state.twitter}
@@ -101,7 +160,7 @@ class CreateProfile extends Component {
             error={errors.twitter}
           />
           <InputGroup
-            placeholder="Linkedin Profile URL"
+            placeholder="Linkedin profile URL"
             name="linkedin"
             icon="fab fa-linkedin fa-2x"
             value={this.state.linkedin}
@@ -109,8 +168,8 @@ class CreateProfile extends Component {
             error={errors.linkedin}
           />
           <InputGroup
-            placeholder="Instagram Profile URL"
-            name="insta"
+            placeholder="Instagram profile URL"
+            name="instagram"
             icon="fab fa-instagram fa-2x"
             value={this.state.instagram}
             onChange={this.onChange}
@@ -120,7 +179,6 @@ class CreateProfile extends Component {
       );
     }
 
-    //Gender options
     const options = [
       { label: "* Select your gender", value: 0 },
       { label: "Male", value: "Male" },
@@ -133,10 +191,8 @@ class CreateProfile extends Component {
         <div className="container">
           <div className="row pb-4">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Create Your Profile</h1>
-              <p className="lead text-center">
-                Let's get some info for your profile
-              </p>
+              <h1 className="display-4 text-center">Edit Your Profile</h1>
+              <p className="lead text-center">Make changes to your profile</p>
               <small className="d-block pb-3">* required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
@@ -192,7 +248,7 @@ class CreateProfile extends Component {
                   info="Name of the institution you are a part of"
                 />
                 <div className="form-group py-3">
-                  <label htmlFor="exampleFormControlFile1">
+                  <label for="exampleFormControlFile1">
                     Upload a Profile Photo
                   </label>
                   <input
@@ -202,7 +258,7 @@ class CreateProfile extends Component {
                   />
                 </div>
                 <div className="form-group pb-3">
-                  <label htmlFor="exampleFormControlFile1">
+                  <label for="exampleFormControlFile1">
                     Upload your Resume/ CV
                   </label>
                   <input
@@ -272,6 +328,8 @@ class CreateProfile extends Component {
 }
 
 CreateProfile.propTypes = {
+  getCurrentProfile: PropTypes.func.isRequired,
+  createProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
 };
@@ -281,6 +339,6 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { createProfile })(
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
   withRouter(CreateProfile)
 );

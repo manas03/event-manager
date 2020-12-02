@@ -1,10 +1,15 @@
 import React from "react";
+import classnames from "classnames";
+import PropTypes from "prop-types";
 
-// Pass properties in the functional (stateless) component
 const InputGroup = ({
+  name,
   placeholder,
-
+  value,
+  error,
+  type,
   icon,
+  onChange,
 }) => {
   return (
     <div className="input-group mb-3">
@@ -14,11 +19,31 @@ const InputGroup = ({
         </span>
       </div>
       <input
-        className="form-control form-control-lg"
+        className={classnames("form-control form-control-lg", {
+          "is-invalid": error,
+        })}
+        name={name}
+        value={value}
         placeholder={placeholder}
+        onChange={onChange}
       />
+      {error && <div className="invalid-feedback">{error}</div>}
     </div>
   );
+};
+
+InputGroup.propTypes = {
+  name: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  icon: PropTypes.string,
+  error: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  onChange: PropTypes.string.isRequired,
+};
+
+InputGroup.defaultProps = {
+  type: "text",
 };
 
 export default InputGroup;

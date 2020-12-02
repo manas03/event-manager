@@ -4,7 +4,7 @@ import TextAreaFieldGroup from "./Common/TextAreaFieldGroup";
 import InputGroup from "./Common/InputGroup.js";
 function Festform(props) {
   let socialInputs;
-  let eventtimeline;
+  // let eventtimeline;
   socialInputs = (
     <div>
       <InputGroup
@@ -33,12 +33,11 @@ function Festform(props) {
         icon="fab fa-youtube"
       />
     </div>
-  )
-let onClick=(e)=> {
+  );
+  let onClick = (e) => {
     e.preventDefault();
-    props.history.push('/festdashboard')
-  }
-  
+    props.history.push("/festdashboard");
+  };
 
   return (
     <div classname="create-profile">
@@ -65,7 +64,7 @@ let onClick=(e)=> {
                 placeholder="Website"
                 info="Your institute website name"
               />
-              
+
               <div className="mb-3">
                 Add Social Network Accounts
                 <span className="text-muted ml-3">Optional</span>

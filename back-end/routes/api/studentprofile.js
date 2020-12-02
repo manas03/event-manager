@@ -94,7 +94,6 @@ router.post(
     if (req.body.phoneno) StudentProfileFields.phoneno = req.body.phoneno;
     if (req.body.dateofbirth)
       StudentProfileFields.dateofbirth = req.body.dateofbirth;
-
     if (req.body.website) StudentProfileFields.website = req.body.website;
     if (req.body.resume) StudentProfileFields.resume = req.body.resume;
     if (req.body.bio) StudentProfileFields.bio = req.body.bio;
@@ -121,13 +120,11 @@ router.post(
 
     StudentProfile.findOne({ user: req.user.id }).then((studentprofile) => {
       if (studentprofile) {
-        studentprofile
-          .findOneAndUpdate(
-            { user: req.user.id },
-            { $set: StudentProfileFields },
-            { new: true }
-          )
-          .then((studentprofile) => res.json(studentprofile));
+        StudentProfile.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: StudentProfileFields },
+          { new: true }
+        ).then((studentprofile) => res.json(studentprofile));
       } else {
         StudentProfile.findOne({ handle: StudentProfileFields.handle }).then(
           (studentprofile) => {
