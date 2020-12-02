@@ -8,30 +8,29 @@ const FestSchema = new Schema({
   },
   festname: {
     type: String,
-    required: true
+    required: true,
   },
   festtagline: {
     type: String,
-    required: true
+    required: true,
   },
   institute: {
     type: String,
-    required: true
+    required: true,
   },
   website: {
-    type: String
+    type: String,
   },
-  hacks:[
-      {
-          type:Schema.Types.ObjectId,
-          ref:"events"
-      }
-
+  hacks: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "events",
+    },
   ],
   date: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 module.exports = Fest = mongoose.model("fests", FestSchema);

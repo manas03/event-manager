@@ -6,14 +6,12 @@ const EventSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "organisers",
   },
-  festuser:{
+  festuser: {
     type: Schema.Types.ObjectId,
     ref: "fests",
- 
   },
-  fest:{
-    type:Boolean,
-    
+  fest: {
+    type: Boolean,
   },
   eventname: {
     type: String,
@@ -50,14 +48,13 @@ const EventSchema = new Schema({
     },
     StartingTime: {
       type: String,
-
     },
     EndingDate: {
       type: Date,
       required: true,
     },
     EndingTime: {
-      type: String
+      type: String,
     },
     ResultDate: {
       type: Date,
@@ -66,25 +63,23 @@ const EventSchema = new Schema({
   eventteamsize: {
     max: {
       type: Number,
-      },
+    },
     min: {
       type: Number,
-      },
+    },
   },
 
   eventprizes: [
     {
       position: {
         type: String,
-  
       },
       prizeinfo: {
         type: String,
-  
       },
     },
   ],
-  
+
   /*sponsorprizes: [
     {
       sponsorprizename: {
@@ -100,17 +95,13 @@ const EventSchema = new Schema({
     },
   ],*/
 
-  
-
   eventfaq: [
     {
       question: {
         type: String,
-      
       },
       answer: {
         type: String,
-
       },
     },
   ],
@@ -118,7 +109,6 @@ const EventSchema = new Schema({
     {
       eventsponsorname: {
         type: String,
-  
       },
       eventspoonsorimage: {
         type: String,
@@ -143,11 +133,9 @@ const EventSchema = new Schema({
     {
       name: {
         type: String,
-        
       },
       phone: {
         type: String,
-    
       },
       email: {
         type: String,

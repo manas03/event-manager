@@ -28,7 +28,7 @@ passport.authenticate("organiser",{session:false}),
       festtagline: req.body.festtagline,
       institute: req.body.institute,
       website: req.body.website,
-      organiser: req.body.id,
+      organiser: req.user.id,
     });
     newFest.save().then((fest) => res.json(fest));
 

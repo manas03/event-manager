@@ -14,7 +14,7 @@ const Student=require('../../models/Student')
 
 router.get('/test',(req,res)=> res.json({msg: "StudentProfile works"}))
 
-router.get('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
+router.get('/',passport.authenticate('student',{session:false}),(req,res)=>{
     const errors={}
     StudentProfile.findOne({user:req.user.id})
     .populate('user',['name','avatar'])
@@ -69,7 +69,7 @@ router.get('/user/:user_id',(req,res)=>{
     .catch(err => res.status(404).json({studentprofile:'There is no StudentProfile for that user id'}));
 });
 
-router.post('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
+router.post('/',passport.authenticate('student',{session:false}),(req,res)=>{
     const{errors,isValid}=validateStudentProfileInput(req.body);
 
     if(!isValid){
@@ -89,6 +89,8 @@ router.post('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
     if(req.body.bio) StudentProfileFields.bio =req.body.bio;
     if(req.body.profilephoto) StudentProfileFields.profilephoto =req.body.profilephoto;
     if(req.body.githubusername) StudentProfileFields.githubusername =req.body.githubusername;
+    if(req.body.institute) StudentProfileFields.institute =req.body.institute;
+
     //Skills
     if(typeof req.body.skills !== 'undefined'){
         StudentProfileFields.skills =req.body.skills.split(',')
@@ -106,7 +108,7 @@ router.post('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
      .then(studentprofile=>{
          if(studentprofile)
          {
-             studentprofile.findOneAndUpdate({user:req.user.id}, {$set :StudentProfileFields},{new:true})
+             StudentProfile.findOneAndUpdate({user:req.user.id}, {$set :StudentProfileFields},{new:true})
               .then(studentprofile=>res.json(studentprofile))
          } else {
              StudentProfile.findOne({handle:StudentProfileFields.handle}).then(studentprofile=>{
@@ -121,7 +123,7 @@ router.post('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
      })
     
 });
-router.post('/experience',passport.authenticate('jwt',{session:false}),(req,res)=>{
+router.post('/experience',passport.authenticate('student',{session:false}),(req,res)=>{
     const{errors,isValid}=validateExperienceInput(req.body);
 
     if(!isValid){
@@ -144,7 +146,7 @@ router.post('/experience',passport.authenticate('jwt',{session:false}),(req,res)
 
     })
 })
-router.post('/education',passport.authenticate('jwt',{session:false}),(req,res)=>{
+router.post('/education',passport.authenticate('student',{session:false}),(req,res)=>{
     const{errors,isValid}=validateEducationInput(req.body);
 
     if(!isValid){

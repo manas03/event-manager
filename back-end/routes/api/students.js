@@ -4,11 +4,11 @@ const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
-const passport = require('passport')
+const passport = require("passport");
 
 // Load Input Validation
-const validateRegisterInput = require('../../validation/register');
-const validateLoginInput = require('../../validation/login');
+const validateRegisterInput = require("../../validation/register");
+const validateLoginInput = require("../../validation/login");
 //Load student model
 const Student = require("../../models/Student");
 //const passport2 = require("../../config/passport2");
@@ -26,7 +26,7 @@ router.post("/register", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  Student.findOne({ email: req.body.email }).then(student => {
+  Student.findOne({ email: req.body.email }).then((student) => {
     if (student) {
       errors.email = "Email already exists";
       return res.status(400).json(errors);
@@ -34,14 +34,14 @@ router.post("/register", (req, res) => {
       const avatar = gravatar.url(req.body.email, {
         s: "200", // Size
         r: "pg", // Rating
-        d: "mm" // Default
+        d: "mm", // Default
       });
 
       const newStudent = new Student({
         name: req.body.name,
         email: req.body.email,
         avatar,
-        password: req.body.password
+        password: req.body.password,
       });
 
       bcrypt.genSalt(10, (err, salt) => {
@@ -50,8 +50,8 @@ router.post("/register", (req, res) => {
           newStudent.password = hash;
           newStudent
             .save()
-            .then(student => res.json(student))
-            .catch(err => console.log(err));
+            .then((student) => res.json(student))
+            .catch((err) => console.log(err));
         });
       });
     }
@@ -72,17 +72,21 @@ router.post("/login", (req, res) => {
   const password = req.body.password;
 
   //Find the student by email
-  Student.findOne({ email }).then(student => {
+  Student.findOne({ email }).then((student) => {
     if (!student) {
       errors.email = "student not found";
       return res.status(404).json(errors);
     }
 
     //check password
-    bcrypt.compare(password, student.password).then(isMatch => {
+    bcrypt.compare(password, student.password).then((isMatch) => {
       if (isMatch) {
         //student matched
-        const payload = { id: student.id, name: student.name, avatar: student.avatar };
+        const payload = {
+          id: student.id,
+          name: student.name,
+          avatar: student.avatar,
+        };
 
         //sign token
         jwt.sign(
@@ -93,7 +97,7 @@ router.post("/login", (req, res) => {
             res.json({
               success: true,
               token: "Bearer " + token,
-              id:payload.name
+              id: payload.name,
             });
           }
         );
@@ -109,20 +113,15 @@ router.post("/login", (req, res) => {
 // @desc    Return current organiser
 // @access  Private
 router.get(
-  '/current',
-  passport.authenticate('student', { session: false }),
+  "/current",
+  passport.authenticate("student", { session: false }),
   (req, res) => {
-    res.json(
-        {
-        
+    res.json({
       id: req.user.id,
       name: req.user.name,
-      email: req.user.email
-        }
-         
-    );
+      email: req.user.email,
+    });
   }
-
 );
 
 module.exports = router;
