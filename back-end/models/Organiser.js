@@ -18,6 +18,21 @@ const OrganiserSchema = new Schema({
     type: String,
     required: true,
   },
+  organisation: {
+    type: String,
+  },
+  bio: {
+    type: String,
+  },
+  post: {
+    type: String,
+  },
+  website: {
+    type: String,
+  },
+  dateofbirth: {
+    type: String,
+  },
   avatar: {
     type: String,
   },
