@@ -21,6 +21,7 @@ import CreateProfile from "./Components/profile/CreateProfile";
 import Profile from "./Components/profile/Profile";
 import EditProfile from "./Components/profile/EditProfile";
 import AddEducation from "./Components/add-creds/AddEducation";
+import StudentDash from "./Components/student-dashboard/StudentDash";
 
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -60,6 +61,7 @@ function App() {
           <Route exact path="/festdashboard" component={Festdashboard} />
           <Route exact path="/profile/:handle" component={Profile} />
           <Route exact path="/add-edu" component={AddEducation} />
+          <Route exact path="/studentdash" component={StudentDash} />
         </div>
       </Router>
     </Provider>

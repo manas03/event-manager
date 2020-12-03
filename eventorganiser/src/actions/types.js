@@ -12,3 +12,7 @@ export const GET_POSTS = "GET_POSTS";
 export const GET_POST = "GET_POST";
 export const ADD_POST = "ADD_POST";
 export const DELETE_POST = "DELETE_POST";
+//
+export const GET_EVENTS = "GET_EVENTS";
+export const GET_EVENT = "GET_EVENT";
+export const EVENT_LOADING = "EVENT_LOADING";

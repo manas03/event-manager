@@ -35,6 +35,7 @@ const EventSchema = new Schema({
 
   eventwebsite: {
     type: String,
+    required: true,
   },
 
   timeline: {
