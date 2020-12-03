@@ -23,6 +23,7 @@ class Navbar extends Component {
   onProfile(e) {
     e.preventDefault();
     const { profile } = this.props.profile;
+    // let handle = !isEmpty(profile.handle) ? profile.handle : " ";
     this.props.history.push(`/profile/${profile.handle}`);
   }
 
@@ -98,7 +99,7 @@ class Navbar extends Component {
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
                 <Link className="nav-link" to="/profiles">
-                  Developers
+                  Users
                 </Link>
               </li>
             </ul>

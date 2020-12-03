@@ -58,7 +58,7 @@ export const addEducation = (eduData, history, handle) => (dispatch) => {
 export const deleteEducation = (id) => (dispatch) => {
   if (window.confirm("Are you sure you wanna delete this education?")) {
     axios
-      .delete(`/api/profile/education/${id}`)
+      .delete(`/api/studentprofile/education/${id}`)
       .then((res) =>
         dispatch({
           type: GET_PROFILE,

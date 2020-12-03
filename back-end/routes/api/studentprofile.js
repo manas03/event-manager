@@ -209,39 +209,45 @@ router.post(
     });
   }
 );
-/*router.delete('/experience/:exp_id',passport.authenticate('jwt',{session:false}),(req,res)=>{
-    
-    StudentProfile.findOne({user:req.user.id})
-    .then(StudentProfile=>{
-        const removeIndex=StudentProfile.experience
-         .map(item=>item.id)
-         .indexOf(req.params.exp_id);
 
-         StudentProfile.experience.splice(removeIndex,1)
+// @route   Delete api/profile/education/:edu_id
+// @desc    Delete education
+// @access  Private
+router.delete(
+  "/education/:edu_id",
+  passport.authenticate("student", { session: false }),
+  (req, res) => {
+    StudentProfile.findOne({ user: req.user.id })
+      .then((studentprofile) => {
+        //Get remove index
+        const removeIndex = studentprofile.education
+          .map((item) => item.id)
+          .indexOf(req.params.edu_id);
 
-         StudentProfile.save().then(StudentProfile=>res.json(StudentProfile))
-     
-    }).catch(err=>res.status(404).json(err))
-})
-router.delete('/education/:edu_id',passport.authenticate('jwt',{session:false}),(req,res)=>{
-    
-    StudentProfile.findOne({user:req.user.id})
-    .then(StudentProfile=>{
-        const removeIndex=StudentProfile.education
-         .map(item=>item.id)
-         .indexOf(req.params.edu_id);
+        //Splice out of array
+        studentprofile.education.splice(removeIndex, 1);
 
-         StudentProfile.education.splice(removeIndex,1)
+        studentprofile
+          .save()
+          .then((studentprofile) => res.json(studentprofile));
+      })
+      .catch((err) => res.status(404).json(err));
+  }
+);
 
-         StudentProfile.save().then(StudentProfile=>res.json(StudentProfile))
-     
-    }).catch(err=>res.status(404).json(err))
-})
-router.delete('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
-    StudentProfile.findOneAndRemove({user:req.user.id})
-    .then(()=>{
-        User.findOneAndRemove({_id:req.user.id})
-        .then(()=>res.json({Success:true}))
-    })
-})*/
+// @route   Delete api/profile
+// @desc    Delete user and profile
+// @access  Private
+router.delete(
+  "/",
+  passport.authenticate("student", { session: false }),
+  (req, res) => {
+    StudentProfile.findOneAndRemove({ user: req.user.id }).then(() => {
+      Student.findByIdAndRemove({ _id: req.user.id }).then(() =>
+        res.json({ success: true })
+      );
+    });
+  }
+);
+
 module.exports = router;
