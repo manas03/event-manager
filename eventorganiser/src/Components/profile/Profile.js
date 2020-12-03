@@ -15,12 +15,12 @@ class Profile extends Component {
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
 
-    let dashboardContent;
+    let profileContent;
     if (profile === null || loading) {
-      dashboardContent = <Spinner />;
+      profileContent = <Spinner />;
     } else {
       if (Object.keys(profile).length > 0) {
-        dashboardContent = (
+        profileContent = (
           <div>
             <div className="row d-flex justify-content-between pb-5">
               <div className="py-4">
@@ -150,7 +150,7 @@ class Profile extends Component {
         );
       } else {
         // Loged in user has no profile
-        dashboardContent = (
+        profileContent = (
           <div>
             <p className="lead text-muted">Welcome {user.name}</p>
             <p>You have not set up a profile yet, add some info</p>
@@ -166,7 +166,7 @@ class Profile extends Component {
       <div className="dashboard">
         <div className="container">
           <div className="row p-5">
-            <div className="col-md-12">{dashboardContent}</div>
+            <div className="col-md-12">{profileContent}</div>
           </div>
         </div>
       </div>
