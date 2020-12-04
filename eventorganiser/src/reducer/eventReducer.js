@@ -1,4 +1,9 @@
-import { GET_EVENTS, GET_EVENT, EVENT_LOADING } from "../actions/types";
+import {
+  GET_EVENTS,
+  GET_EVENT,
+  EVENT_LOADING,
+  ADD_EVENT,
+} from "../actions/types";
 
 const initialState = { event: null, events: null, loading: false };
 
@@ -21,6 +26,13 @@ export default function errorReducer(state = initialState, action) {
         event: action.payload,
         loading: false,
       };
+
+    case ADD_EVENT:
+      return {
+        ...state,
+        events: [action.payload, ...state.events],
+      };
+
     default:
       return state;
   }
