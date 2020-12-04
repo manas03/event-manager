@@ -101,8 +101,6 @@ router.post(
     const StudentProfileFields = {};
     StudentProfileFields.user = req.user.id;
     if (req.body.handle) StudentProfileFields.handle = req.body.handle;
-    if (req.body.firstname) StudentProfileFields.firstname = req.body.firstname;
-    if (req.body.lastname) StudentProfileFields.lastname = req.body.lastname;
     if (req.body.gender) StudentProfileFields.gender = req.body.gender;
     if (req.body.phoneno) StudentProfileFields.phoneno = req.body.phoneno;
     if (req.body.dateofbirth)

@@ -43,6 +43,8 @@ router.post("/register", (req, res) => {
         password: req.body.password,
         organisation: req.body.organisation,
         post: req.body.post,
+        website: req.body.website,
+
         dateofbirth: req.body.dateofbirth,
         bio: req.body.bio,
       });
