@@ -7,8 +7,28 @@ import isEmpty from "../../validation/is-empty";
 import Education from "./Education";
 import ProfileSkills from "./ProfileSkills";
 import Spinner from "../Common/Spinner";
+import Particles from "react-particles-js";
 
-import "./Profile.css";
+const particleOptions = {
+  particles: {
+    number: {
+      value: 150,
+      density: {
+        enable: true,
+        value_area: 1000,
+      },
+    },
+    opacity: {
+      value: 0.4,
+      anim: {
+        enable: true,
+      },
+    },
+    move: {
+      speed: 0.8,
+    },
+  },
+};
 
 class Profile extends Component {
   render() {
@@ -46,11 +66,7 @@ class Profile extends Component {
             </p>
             <div className="container p-4">
               <div className="float-right">
-                <img
-                  className="photo"
-                  src="https://images.unsplash.com/photo-1497316730643-415fac54a2af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1900&q=80"
-                  alt="Display"
-                />
+                <img className="photo" src={user.avatar} alt="Display" />
               </div>
               <h4 className="name">{user.name}</h4>
               <p className="info">{profile.institute}</p>
@@ -87,7 +103,7 @@ class Profile extends Component {
               <span className="font-weight-bold">Phone Number:</span>{" "}
               {profile.phoneno}
             </p>
-            <h5 className="py-3">{user.name}'s Social Media</h5>
+            <h5 className="pt-5 pb-3">{user.name}'s Social Media</h5>
             {isEmpty(profile.social && profile.social.twitter) ? null : (
               <a
                 className="text-white p-2"
@@ -166,7 +182,10 @@ class Profile extends Component {
       <div className="dashboard">
         <div className="container">
           <div className="row p-5">
-            <div className="col-md-12">{profileContent}</div>
+            <div className="col-md-12">
+              <Particles className="particles" params={particleOptions} />
+              {profileContent}
+            </div>
           </div>
         </div>
       </div>

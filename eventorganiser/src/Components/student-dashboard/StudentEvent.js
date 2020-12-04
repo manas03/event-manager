@@ -31,7 +31,9 @@ class StudentEvent extends Component {
             <p className="text-left">{event.venue}</p>
             <p className="text-right">
               Starts:{" "}
-              <Moment format="DD/MM/YYYY">{event.timeline.StartingDate}</Moment>
+              <Moment format="DD/MM/YYYY">
+                {moment.utc(event.timeline.StartingDate)}
+              </Moment>
             </p>
           </div>
         </div>

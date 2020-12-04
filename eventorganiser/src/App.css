@@ -29,6 +29,33 @@
   height: 100%;
 }
 
+.photo {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+}
+
+.head-style {
+  font-size: 7rem;
+  text-align: center;
+  /* height: 90vh;
+  line-height: 90vh; */
+  /* background: #d52e3f; */
+  color: #fcedd8;
+  font-family: "Niconne", cursive;
+  font-weight: 550;
+  text-shadow: 5px 5px 0px #eb452b, 10px 10px 0px #46b59b, 15px 15px 0px #052939;
+}
+
+.particles {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  /* z-index: -1; */
+}
+
 .card-form {
   opacity: 0.9;
 }

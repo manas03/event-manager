@@ -4,6 +4,28 @@ import { connect } from "react-redux";
 import { getEvents } from "../../actions/eventActions";
 import Spinner from "../Common/Spinner";
 import StudentEvent from "./StudentEvent";
+import Particles from "react-particles-js";
+
+const particleOptions = {
+  particles: {
+    number: {
+      value: 150,
+      density: {
+        enable: true,
+        value_area: 1000,
+      },
+    },
+    opacity: {
+      value: 0.4,
+      anim: {
+        enable: true,
+      },
+    },
+    move: {
+      speed: 0.8,
+    },
+  },
+};
 
 class StudentDash extends Component {
   componentDidMount() {
@@ -30,6 +52,7 @@ class StudentDash extends Component {
     return (
       <div>
         <div className="container">
+          <Particles className="particles" params={particleOptions} />
           <h2 className="second py-4">Welcome {user.name}</h2>
           <h4 className="third">Take a look at the various events going on</h4>
         </div>

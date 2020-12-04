@@ -22,7 +22,7 @@ export const getEvents = () => (dispatch) => {
 };
 
 // Get Event by ID
-export const getEventById = (id) => (dispatch) => {
+export const getEvent = (id) => (dispatch) => {
   dispatch(setEventLoading());
   axios
     .get(`/api/events/${id}`)
