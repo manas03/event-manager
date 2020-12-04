@@ -8,7 +8,6 @@ import store from "./store";
 
 import "./App.css";
 import Events from "./Components/Events";
-import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Navbar from "./Components/Navbar";
 import Dashboard from "./Components/Dashboard";
@@ -21,6 +20,12 @@ import CreateProfile from "./Components/profile/CreateProfile";
 import Profile from "./Components/profile/Profile";
 import EditProfile from "./Components/profile/EditProfile";
 import AddEducation from "./Components/add-creds/AddEducation";
+import RegisterOrganiser from "./Components/RegisterOrganiser";
+import LoginOrganiser from "./Components/LoginOrganiser";
+import AddEvent from "./Components/AddEvent";
+import OrganiserEvent from "./Components/OrganiserEvent";
+import Organiserdata from "./Components/Organiserdata";
+import Fest from "./Components/Fest";
 
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -49,10 +54,16 @@ function App() {
           <Navbar />
           <Route exact path="/" component={Landing} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
+          <Route
+            exact
+            path="/registerorganiser"
+            component={RegisterOrganiser}
+          />
+
+          <Route exact path="/login" component={LoginOrganiser} />
           <Route exact path="/loginuser" component={LoginUser} />
           <Route exact path="/registeruser" component={RegisterUser} />
-          <Route exact path="/addevent" component={Events} />
+          <Route exact path="/addevent" component={AddEvent} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/addfest" component={Festform} />
           <Route exact path="/create-profile" component={CreateProfile} />
@@ -60,6 +71,9 @@ function App() {
           <Route exact path="/festdashboard" component={Festdashboard} />
           <Route exact path="/profile/:handle" component={Profile} />
           <Route exact path="/add-edu" component={AddEducation} />
+          <Route exact path="/eventdash" component={OrganiserEvent} />
+          <Route exact path="/data" component={Organiserdata} />
+          <Route exact path="/fest/:id" component={Fest} />
         </div>
       </Router>
     </Provider>
