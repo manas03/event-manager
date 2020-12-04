@@ -43,7 +43,99 @@ router.get("/:id", (req, res) => {
 // @access  Private
 
 router.post(
-  "/:id",
+  "/",
+  passport.authenticate("organiser", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateEventInput(req.body);
+
+    //Check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    // Get fields
+    const eventFields = {};
+    eventFields.user = req.user.id;
+
+    if (req.body.fest) eventFields.fest = req.body.fest;
+
+    if (req.body.eventname) eventFields.eventname = req.body.eventname;
+    if (req.body.eventinfo) eventFields.eventinfo = req.body.eventinfo;
+    if (req.body.eventwebsite) eventFields.eventwebsite = req.body.eventwebsite;
+    if (req.body.venue) eventFields.venue = req.body.venue;
+    if (req.body.organisation) eventFields.organisation = req.body.organisation;
+    if (req.body.eventimage) eventFields.eventimage = req.body.eventimage;
+    // Skills - Spilt into array
+
+    // Social
+    eventFields.eventsocial = {};
+    if (req.body.youtube) eventFields.eventsocial.youtube = req.body.youtube;
+    if (req.body.twitter) eventFields.eventsocial.twitter = req.body.twitter;
+    if (req.body.facebook) eventFields.eventsocial.facebook = req.body.facebook;
+    if (req.body.linkedin) eventFields.eventsocial.linkedin = req.body.linkedin;
+    if (req.body.instagram)
+      eventFields.eventsocial.instagram = req.body.instagram;
+    eventFields.timeline = {};
+    if (req.body.RegistrationDeadline)
+      eventFields.timeline.RegistrationDeadline = req.body.RegistrationDeadline;
+    if (req.body.StartingDate)
+      eventFields.timeline.StartingDate = req.body.StartingDate;
+    if (req.body.StartingTime)
+      eventFields.timeline.StartingTime = req.body.StartingTime;
+    if (req.body.EndingDate)
+      eventFields.timeline.EndingDate = req.body.EndingDate;
+    if (req.body.EndingTime)
+      eventFields.timeline.EndingTime = req.body.EndingTime;
+    if (req.body.ResultDate)
+      eventFields.timeline.ResultDate = req.body.ResultDate;
+
+    eventFields.eventteamsize = {};
+    if (req.body.max) eventFields.eventteamsize.max = req.body.max;
+    if (req.body.min) eventFields.eventteamsize.min = req.body.min;
+
+    Event.findOne({ eventname: req.user.eventname }).then((event) => {
+      if (event) {
+        // Update
+        Event.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: eventFields },
+          { new: true }
+        ).then((event) => res.json(event));
+      } else {
+        // Create
+
+        // Check if handle exists
+
+        // Save Profile
+        /*   if(eventFields.fest.toString()=="true")
+          {
+           
+        Fest.findOne({festuser:req.user.festuser}).then(fest=>{
+        fest.hacks.unshift(eventFields);
+
+             fest.save().then(fest =>res.json(fest) )
+
+     })
+          }*/
+
+        new Event(eventFields).save().then((event) => res.json(event));
+      }
+    });
+
+    /*const newEvent = new Event({
+      eventname: req.body.eventname,
+      eventinfo: req.body.eventinfo,
+      eventimage: req.body.eventimage,
+      organisation: req.body.organisation,
+      venue: req.body.venue,
+      eventwebsite: req.body.eventwebsite,
+      organiser: req.body.id,
+    });
+    newEvent.save().then((event) => res.json(event));*/
+  }
+);
+router.post(
+  "/fest/event/:id",
   passport.authenticate("organiser", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateEventInput(req.body);
@@ -170,13 +262,8 @@ router.post(
           position: req.body.position,
           prizeinfo: req.body.prizeinfo,
         };
-        const newprizes1 = {
-          sponsorprizename: req.body.sponsorprizename,
-          sponsorprize: req.body.sponsorprize,
-          sponsorprizeinfo: req.body.sponsorprizeinfo,
-        };
+
         event.eventprizes.unshift(newprizes);
-        event.sponsorprizes.unshift(newprizes1);
 
         event.save().then((event) => res.json(event));
       });

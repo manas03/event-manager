@@ -1,28 +1,35 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const mongoose = require('mongoose');
-const passport = require('passport');
-const Fest= require('../../models/Fest')
+const mongoose = require("mongoose");
+const passport = require("passport");
+const Fest = require("../../models/Fest");
 // Load organiser model
-const Organiser = require('../../models/Organiser')
-const Event=require("../../models/Event")
+const Organiser = require("../../models/Organiser");
+const Event = require("../../models/Event");
 const validateFestInput = require("../../validation/fest");
 router.get("/", (req, res) => {
   Fest.find()
     .sort({ date: -1 })
     .then((fests) => res.json(fests))
-    .catch(err => res.status(404).json({ noeventsfound: "No events found" }));
+    .catch((err) => res.status(404).json({ nofestsfound: "No fests found" }));
 });
+router.get("/:id", (req, res) => {
+  const errors = {};
+  Fest.findById(req.params.id)
+    .then((fest) => res.json(fest))
+    .catch((err) =>
+      res.status(404).json({ nopostfound: "No fest found by that ID" })
+    );
+});
+router.post(
+  "/fest",
+  passport.authenticate("organiser", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateFestInput(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
 
-router.post("/fest",
-passport.authenticate("organiser",{session:false}),
-(req,res)=>{
-  const { errors, isValid } = validateFestInput(req.body);
-  if (!isValid) {
-    return res.status(400).json(errors);
-
-  }
-  
     const newFest = new Fest({
       festname: req.body.festname,
       festtagline: req.body.festtagline,
@@ -31,9 +38,8 @@ passport.authenticate("organiser",{session:false}),
       organiser: req.user.id,
     });
     newFest.save().then((fest) => res.json(fest));
-
-}
-)
+  }
+);
 /*router.post(
   '/fest/:id',
   passport.authenticate('jwt', { session: false }),
@@ -61,4 +67,4 @@ passport.authenticate("organiser",{session:false}),
   }
 );*/
 
-module.exports=router
+module.exports = router;

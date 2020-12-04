@@ -11,7 +11,6 @@ module.exports = function validateEventInput(data) {
   data.organisation = !isEmpty(data.organisation) ? data.organisation : "";
   data.venue = !isEmpty(data.venue) ? data.venue : "";
   data.website = !isEmpty(data.website) ? data.website : "";
-  data.fest = !isEmpty(data.fest) ? data.fest : "";
 
   if (!Validator.isLength(data.eventname, { min: 2, max: 40 })) {
     errors.eventname = "eventname needs to between 2 and 4 characters";
@@ -20,9 +19,7 @@ module.exports = function validateEventInput(data) {
   if (Validator.isEmpty(data.eventname)) {
     errors.eventname = " eventname is required";
   }
-  if (Validator.isEmpty(data.fest)) {
-    errors.fest = " fest is required";
-  }
+
   if (Validator.isEmpty(data.eventinfo)) {
     errors.eventinfo = "eventinfo is required";
   }
