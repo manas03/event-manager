@@ -277,6 +277,20 @@ h1 {
   background-repeat: no-repeat;
 }
 
+.property-image1 {
+  height: 7em;
+  width: 22em;
+  padding: 1em 2em;
+  position: Absolute;
+  top: 0px;
+  -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  background-image: url("https://scontent.fdel9-1.fna.fbcdn.net/v/t1.0-9/71491962_2555850771121055_2111966712298471424_o.jpg?_nc_cat=104&ccb=2&_nc_sid=e3f864&_nc_ohc=DrgQF8y5rkYAX-xO4xn&_nc_ht=scontent.fdel9-1.fna&oh=83b8dbf95d6a25368cec0ae9e18513df&oe=5FEF1F34g");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 /* Bottom Card Section */
 
 .property-description {

@@ -10,6 +10,28 @@ import EventPrizes from "./EventPrizes";
 import isEmpty from "../../validation/is-empty";
 
 // import bgimg from "../../img/landing2.jpg";
+import Particles from "react-particles-js";
+
+const particleOptions = {
+  particles: {
+    number: {
+      value: 150,
+      density: {
+        enable: true,
+        value_area: 1000,
+      },
+    },
+    opacity: {
+      value: 0.4,
+      anim: {
+        enable: true,
+      },
+    },
+    move: {
+      speed: 0.8,
+    },
+  },
+};
 
 class Event extends Component {
   constructor() {
@@ -167,7 +189,16 @@ class Event extends Component {
       );
     }
 
-    return <div className="container">{eventContent}</div>;
+    return (
+      <div className="dashboard">
+        <div className="container">
+          <div className="row">
+            <Particles className="particles" params={particleOptions} />
+            <div className="col-md-12">{eventContent}</div>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 

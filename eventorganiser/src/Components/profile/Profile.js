@@ -182,10 +182,8 @@ class Profile extends Component {
       <div className="dashboard">
         <div className="container">
           <div className="row p-5">
-            <div className="col-md-12">
-              <Particles className="particles" params={particleOptions} />
-              {profileContent}
-            </div>
+            <Particles className="particles" params={particleOptions} />
+            <div className="col-md-12">{profileContent}</div>
           </div>
         </div>
       </div>
