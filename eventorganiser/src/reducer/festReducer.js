@@ -1,4 +1,4 @@
-import { ADD_FEST, GET_FEST, FEST_LOADING } from "../actions/types";
+import { ADD_FEST, GET_FEST } from "../actions/types";
 
 const initialState = {
   fest: {},
