@@ -8425,6 +8425,11 @@
   "resolved" "https://registry.npmjs.org/path-type/-/path-type-4.0.0.tgz"
   "version" "4.0.0"
 
+"pathseg@^1.2.0":
+  "integrity" "sha512-+pQS7lTaoVIXhaCW7R3Wd/165APzZHWzYVqe7dxzdupxQwebgpBaCmf0/XZwmoA/rkDq3qvzO0qv4d5oFVrBRw=="
+  "resolved" "https://registry.npmjs.org/pathseg/-/pathseg-1.2.0.tgz"
+  "version" "1.2.0"
+
 "pbkdf2@^3.0.3":
   "integrity" "sha512-4Ejy1OPxi9f2tt1rRV7Go7zmfDQ+ZectEQz3VGUQhgq62HtIRPDyG/JtnwIxs6x3uNMwo2V7q1fMvKjb+Tnpqg=="
   "resolved" "https://registry.npmjs.org/pbkdf2/-/pbkdf2-3.1.1.tgz"
@@ -9510,6 +9515,14 @@
   "resolved" "https://registry.npmjs.org/react-moment/-/react-moment-1.0.0.tgz"
   "version" "1.0.0"
 
+"react-particles-js@^3.4.1":
+  "integrity" "sha512-c3+vITUMN9RlgbERZYd9Kzvjmf49ENp07+9+NDLvE1Jf9euabrJi/q6gCCcv5foxGHBYjHnGs47Tusmrl0/+GQ=="
+  "resolved" "https://registry.npmjs.org/react-particles-js/-/react-particles-js-3.4.1.tgz"
+  "version" "3.4.1"
+  dependencies:
+    "lodash" "^4.17.11"
+    "tsparticles" "^1.18.10"
+
 "react-phone-input-2@^2.13.9":
   "integrity" "sha512-2sP7fAYBEw30S0FaI5VbuhjLQEdfJ4voq7C3iqWW8RiXxxWBtIQ+0SiQxDjvadbSS3C8P0KHIUIAnrgVOzOz1g=="
   "resolved" "https://registry.npmjs.org/react-phone-input-2/-/react-phone-input-2-2.13.9.tgz"
@@ -9633,7 +9646,7 @@
   optionalDependencies:
     "fsevents" "^2.1.3"
 
-"react@^15.6.0 || ^16.0.0", "react@^17.0.1":
+"react@^15.6.0 || ^16.0.0", "react@^16.0.0", "react@^17.0.1":
   "integrity" "sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.1.tgz"
   "version" "17.0.1"
@@ -11516,6 +11529,15 @@
   "integrity" "sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg=="
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   "version" "1.14.1"
+
+"tsparticles@^1.18.10":
+  "integrity" "sha512-F5czk8foRoywWHDYDT0eZhQwCXOHz7OGhJCsoybThTUIT+nwc1Eclltm/TMrnnxZZghF3Fo0VL8nN4inf+pQbA=="
+  "resolved" "https://registry.npmjs.org/tsparticles/-/tsparticles-1.18.11.tgz"
+  "version" "1.18.11"
+  dependencies:
+    "pathseg" "^1.2.0"
+  optionalDependencies:
+    "pathseg" "^1.2.0"
 
 "tsutils@^3.17.1":
   "integrity" "sha512-kzeQ5B8H3w60nFY2g8cJIuH7JDpsALXySGtwGJ0p2LSjLgay3NdIpqq5SoOBe46bKDW2iq25irHCr8wjomUS2g=="
